@@ -36,7 +36,7 @@ class UserService:
             password.encode('utf-8'),
             self.config.PWD_HASH_SALT,
             self.config.PWD_HASH_ITERATIONS
-        ).decode("utf-8", "ignore")
+        )
 
     def get_pass_hash(self, password):
         pass_hash = self.get_hash(password)
