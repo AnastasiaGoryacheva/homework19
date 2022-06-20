@@ -1,6 +1,6 @@
 import jwt
-from calendar import calendar
-from datetime import datetime
+import calendar
+import datetime
 
 from flask_restx import abort
 
@@ -13,7 +13,7 @@ class AuthService:
         self.user_service = user_service
         self.config = config
 
-    def generate_tokens(self, username, password, is_refresh=False, jwt=None):
+    def generate_tokens(self, username, password, is_refresh=False):
         user = self.user_service.get_by_username(username)
         user = user[0]
         if user is None:
@@ -40,7 +40,7 @@ class AuthService:
             'refresh_token': refresh_token
         }
 
-    def approve_refresh_token(self, refresh_token, jwt=None):
+    def approve_refresh_token(self, refresh_token):
         data = jwt.decode(refresh_token, Config.SECRET_HERE, Config.ALGORITHM)
         username = data.get('username')
 
